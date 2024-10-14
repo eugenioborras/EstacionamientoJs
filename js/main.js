@@ -3,7 +3,7 @@ let patente = 0;
 let clase = "";
 const autos = [];
 const resumen = [];
-let fecha = new Date();
+
 
 while(entrada != "5"){
     
@@ -11,7 +11,10 @@ while(entrada != "5"){
         case "1":
             console.log("Ingresa vehículo")
             patente = prompt("ingresa los 3 números de la patente") ;
-            //clase.toLowerCase = prompt("Ingresa clase de vehículo."+ "\n"+"A-Auto"+ "\n"+"C-Camioneta/SUV"+ "\n"+"M-Moto")
+            if(patente.length > 3 && patente.length < 3){
+                alert ("Error en formato de fatente, por favor ingrese nuevamente la patente")
+                patente = prompt("ingresa los 3 números de la patente") ;
+            }else
             ingresar(patente);
             break;
         case "2":
@@ -28,7 +31,6 @@ while(entrada != "5"){
         case "4" :
             console.log("Resumen diario de vahículos");
             console.log(resumen.join(" "+ "\n"));
-            console.log(fecha.toDateString)
             break;
         default :
         console.log("Error, ingrese una opcion válida");
@@ -49,12 +51,9 @@ function ingresar (patente) {
 
 function eliminar (patente){
     if(autos.includes(patente)){
-        if(autos.indexOf(patente) > 0)
-            autos.splice(1,autos.indexOf(patente))
+        if(autos.indexOf(patente) >= 0)
+            autos.splice(autos.indexOf(patente) , 1)
     }else{
         console.log("el auto no se encuentra en la lista")
     }
 }
-
-//for-of recorre el array y realiza la accion 
-//for(auto of autos){}
