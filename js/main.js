@@ -33,7 +33,7 @@ while(entrada != "6"){
             console.log(resumen.join(" "+ "\n"));
             break;
         default :
-        console.log("Error, ingrese una opcion válida");
+        alert("Error, ingrese una opcion válida");
             break;
     }
     entrada =  prompt ("ingrese la opción deseada"+ "\n"+"1-Entra"+"\n"+"2-Sale"+"\n"+"3-Modificar Patente"+"\n"+"4-Autos ingresados"+"\n"+"5-Resumen del día"+"\n"+"6-Salir");
@@ -54,7 +54,7 @@ function eliminar (patente){
         if(autos.indexOf(patente) >= 0)
             autos.splice(autos.indexOf(patente) , 1);
     }else{
-        console.log("el auto no se encuentra en la lista");
+        alert("el auto no se encuentra en la lista");
     }
 }
 
@@ -64,7 +64,8 @@ function editar(patente){
             nuevaPatente = prompt ("Ingrese la nueva patente")
             autos.splice(autos.indexOf(patente) , 1, nuevaPatente);
             resumen.splice(resumen.indexOf(patente) , 1, nuevaPatente);
+            console.log("Patente editada exitosamente")
     }else{
-        console.log("el auto no se encuentra en la lista");
+        alert("el auto no se encuentra en la lista");
     }
 }
