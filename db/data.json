@@ -1,0 +1,44 @@
+[
+    {
+        "nombre": "Eugenio Borras",
+        "patente": "vlf979 ",
+        "clase": "Auto",
+        "tel": "2616111111"
+    },
+    {
+        "nombre": "Diego Maradona",
+        "patente": "aaa111",
+        "clase": "Camioneta",
+        "tel": "118884441"
+    },
+    {
+        "nombre": "Martin Palermo",
+        "patente": "bbb999 ",
+        "clase": "Moto",
+        "tel": "74741111"
+    },
+    {
+        "nombre": "Juan Perez",
+        "patente": "hjk789",
+        "clase": "Auto",
+        "tel": "26188811111"
+    },
+    {
+        "nombre": "Sol Oviedo",
+        "patente": "opl354 ",
+        "clase": "Moto",
+        "tel": "261343555"
+    },
+    {
+        "nombre": "Luciano Pepa",
+        "patente": "jsn123",
+        "clase": "Camioneta",
+        "tel": "7666616777 "
+    },
+    {
+        "nombre": "lucca Lescano",
+        "patente": "777445",
+        "clase": "Moto",
+        "tel": "71245678"
+    }
+]

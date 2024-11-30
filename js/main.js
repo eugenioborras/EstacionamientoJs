@@ -1,71 +1,115 @@
-let entrada =  prompt ("ingrese la opción deseada"+ "\n"+"1-Entra"+"\n"+"2-Sale"+"\n"+"3-Editar Patente"+"\n"+"4-Autos ingresados"+"\n"+"5-Resumen del día"+"\n"+"6-Salir");
-let patente = 0;
-const autos = [];
-const resumen = [];
-let nuevaPatente = 0;
+const listaVehiculos = [];  
+const listaDiaria = [];  
+let patente = document.getElementById("pat");
+let patenteSale = document.getElementById("patenteSale");
+let clase = document.getElementById("claseV");
+let entra = document.getElementById("btnEntra");
+let sale = document.getElementById("btnSale");
+let claseSale = document.getElementById("claseS");
 
-while(entrada != "6"){
+class Vehiculo {
+    constructor(patente, clase) {
+        this.patente = patente;
+        this.clase = clase;
+    }
+}   
+
+function imprimirVehiculos() {
+    const contenedor = document.getElementById("conteinerVehiculos");
+    const contenedorDiario = document.getElementById("conteinerDiario");
     
-    switch(entrada){
-        case "1":
-            console.log("Ingresa vehículo")
-            patente = prompt("ingresa los 3 números de la patente") ;
-            ingresar(patente);
-            break;
-        case "2":
-            console.log("salida de vehiculo");
-            patente = prompt("ingresa los 3 números de la patente") ;
-            eliminar(patente);
-            break;
-        case "3":
-            console.log("Editar Patente");
-            patente = prompt("Ingresa la patente a editar");
-            editar(patente);
-            break;
-        case "4":
-            console.log("Autos en playa");
-            autos.sort();
-            console.log(autos.join(" "+ "\n"));
-            console.log("Hay "+autos.length + " autos en playa");
-            break;
-        case "5" :
-            console.log("Resumen diario de vahículos");
-            console.log(resumen.join(" "+ "\n"));
-            break;
-        default :
-        alert("Error, ingrese una opcion válida");
-            break;
-    }
-    entrada =  prompt ("ingrese la opción deseada"+ "\n"+"1-Entra"+"\n"+"2-Sale"+"\n"+"3-Modificar Patente"+"\n"+"4-Autos ingresados"+"\n"+"5-Resumen del día"+"\n"+"6-Salir");
-}
+    contenedor.innerHTML = "";
+    contenedorDiario.innerHTML = "";
 
-function ingresar (patente) {
-    if (autos.includes(patente)) {
-        alert ("Este auto ya fue ingresado"); 
-    }else{
-        autos.push(patente);
-        resumen.push(patente);
+    for (const vehiculo of listaVehiculos) {
+        const lista = document.createElement("div");
+        lista.innerHTML = `
+            <h3 class="text-center border">${vehiculo.patente}</h3>
+            <p class="text-center border">${vehiculo.clase}</p>
+        `;
+        contenedor.appendChild(lista);
     }
+
+    for (const vehiculo of listaDiaria) {
+        const lista = document.createElement("div");
+        lista.innerHTML = `
+            <h3 class="text-center border">${vehiculo.patente}</h3>
+            <p class="text-center border">${vehiculo.clase}</p>
+        `;
+        contenedorDiario.appendChild(lista);
+    }
+    localStorage.setItem("vehiculosEnPlaya", JSON.stringify(listaVehiculos))
+    sessionStorage.setItem("vehiculosDiarios", JSON.stringify(listaDiaria))
     
 }
 
-function eliminar (patente){
-    if(autos.includes(patente)){
-        if(autos.indexOf(patente) >= 0)
-            autos.splice(autos.indexOf(patente) , 1);
-    }else{
-        alert("el auto no se encuentra en la lista");
+function eliminarVehiculo(patente, clase) {
+    const index = listaVehiculos.findIndex(vehiculo => vehiculo.patente === patente && vehiculo.clase === clase);
+
+    if (index !== -1) {
+        listaVehiculos.splice(index, 1);
     }
+
+    imprimirVehiculos();
 }
 
-function editar(patente){
-    if(autos.includes(patente)){
-        if(autos.indexOf(patente) >= 0)
-            nuevaPatente = prompt ("Ingrese la nueva patente")
-            autos.splice(autos.indexOf(patente) , 1, nuevaPatente);
-            resumen.splice(resumen.indexOf(patente) , 1, nuevaPatente);
-            console.log("Patente editada exitosamente")
-    }else{
-        alert("el auto no se encuentra en la lista");
-    }
+function comprobarVehiculoRepetido(patente, clase) {
+    return listaVehiculos.some(vehiculo => vehiculo.patente === patente && vehiculo.clase === clase);
 }
+
+
+function actualizarBotonEntra() {
+    const esRepetido = comprobarVehiculoRepetido(patente.value, clase.value);
+    let msj = ""
+    try{
+    if (esRepetido) {
+        entra.disabled = true;
+        throw new Error (swal("¡Vehiculo Repetido!", {
+            icon: "warning",
+            buttons: false,
+            timer: 1000,
+          }))
+    } else {
+        entra.disabled = false;
+    }
+} catch(err){
+    msj = err
+}
+}
+
+patente.addEventListener("input", actualizarBotonEntra);
+clase.addEventListener("input", actualizarBotonEntra);
+
+entra.onclick = () => {
+    const vehiculo = new Vehiculo(patente.value, clase.value);
+    listaVehiculos.push(vehiculo);
+
+    listaDiaria.push(vehiculo);
+
+    imprimirVehiculos();
+    Toastify({
+        text: "Vehiculo Ingresado",
+        className: "info",
+        style: {
+          background: " #000000",
+          color: "#fffb00",
+        }
+      }).showToast();
+}
+
+
+sale.onclick = () => {
+    const patenteAEliminar = patenteSale.value;
+    const claseAEliminar = claseSale.value;
+
+    eliminarVehiculo(patenteAEliminar, claseAEliminar);
+    Toastify({
+        text: "Vehiculo Eliminado",
+        className: "info",
+        style: {
+          background: " #000000",
+          color: "#fffb00",
+        }
+      }).showToast();
+}
+
