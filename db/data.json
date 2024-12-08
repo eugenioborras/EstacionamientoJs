@@ -3,42 +3,50 @@
         "nombre": "Eugenio Borras",
         "patente": "vlf979 ",
         "clase": "Auto",
-        "tel": "2616111111"
+        "tel": "2616111111",
+        "mesPago": "Marzo"
+        
     },
     {
         "nombre": "Diego Maradona",
         "patente": "aaa111",
         "clase": "Camioneta",
-        "tel": "118884441"
+        "tel": "118884441",
+        "mesPago": "Agosto"        
     },
     {
         "nombre": "Martin Palermo",
         "patente": "bbb999 ",
         "clase": "Moto",
-        "tel": "74741111"
+        "tel": "74741111",
+        "mesPago": "Julio"
     },
     {
         "nombre": "Juan Perez",
         "patente": "hjk789",
         "clase": "Auto",
-        "tel": "26188811111"
+        "tel": "26188811111",
+        "mesPago": "Enero"
     },
     {
         "nombre": "Sol Oviedo",
         "patente": "opl354 ",
         "clase": "Moto",
-        "tel": "261343555"
+        "tel": "261343555",
+        "mesPago": "Abril"
     },
     {
         "nombre": "Luciano Pepa",
         "patente": "jsn123",
         "clase": "Camioneta",
-        "tel": "7666616777 "
+        "tel": "7666616777 ",
+        "mesPago": "Marzo"
     },
     {
         "nombre": "lucca Lescano",
         "patente": "777445",
         "clase": "Moto",
-        "tel": "71245678"
+        "tel": "71245678",
+        "mesPago": "Enero"
     }
 ]
